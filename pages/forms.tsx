@@ -5,16 +5,28 @@ interface LoginForm {
   username: string;
   email: string;
   password: string;
+  errors?: string;
 }
 
 export default function Forms() {
-  const { register, handleSubmit } = useForm<LoginForm>();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    setValue,
+    setError,
+  } = useForm<LoginForm>({
+    mode: "onBlur",
+  });
   const onValid = (data: LoginForm) => {
     console.log("valid");
+    setError("username", { message: "Taken username" });
   };
   const onInvalid = (errors: FieldErrors) => {
-    console.log(errors);
+    console.error(errors);
   };
+  console.log(errors);
+  setValue("username", "noname");
   return (
     <form onSubmit={handleSubmit(onValid, onInvalid)}>
       <input
@@ -28,14 +40,20 @@ export default function Forms() {
         type="text"
         placeholder="username"
       />
+      <p>{errors.username?.message}</p>
       <input
         {...register("email", {
           required: "Email is required",
+          validate: {
+            notGmail: (value) =>
+              !value.includes("@gmail.com") || "Gmail is not allowed",
+          },
         })}
         type="email"
         placeholder="email"
+        className={`${Boolean(errors.email) ? "border-red-500" : ""}`}
       />
-
+      <p>{errors.email?.message}</p>
       <input
         {...register("password", {
           required: "Password is required",
@@ -45,6 +63,7 @@ export default function Forms() {
       />
 
       <input type="submit" value="Create" />
+      {errors.errors?.message}
     </form>
   );
 }

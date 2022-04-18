@@ -25,7 +25,7 @@ export default function Forms() {
   const onInvalid = (errors: FieldErrors) => {
     console.error(errors);
   };
-  console.log(errors);
+
   setValue("username", "noname");
   return (
     <form onSubmit={handleSubmit(onValid, onInvalid)}>

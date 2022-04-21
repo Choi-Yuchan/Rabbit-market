@@ -6,7 +6,7 @@ import useUser from "@libs/client/useUser";
 import Head from "next/head";
 import useSWR from "swr";
 import { Product } from "@prisma/client";
-interface ProductsWithFavs extends Product {
+export interface ProductsWithFavs extends Product {
   _count: FavType;
 }
 type FavType = {

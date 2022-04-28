@@ -19,7 +19,6 @@ export default function Forms() {
     mode: "onBlur",
   });
   const onValid = (data: LoginForm) => {
-    console.log("valid");
     setError("username", { message: "Taken username" });
   };
   const onInvalid = (errors: FieldErrors) => {

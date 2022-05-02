@@ -7,9 +7,9 @@ export function middleware(req: NextRequest, ev: NextFetchEvent) {
       status: 403,
     });
   }
-  if (!req.url.includes("/api")) {
-    if (!req.url.includes("/enter") && !req.cookies.rabbitsession) {
-      return NextResponse.redirect("/enter");
-    }
-  }
+  // if (!req.url.includes("/api")) {
+  //   if (!req.url.includes("/enter") && !req.cookies.rabbitsession) {
+  //     return NextResponse.redirect("/enter");
+  //   }
+  // }
 }
